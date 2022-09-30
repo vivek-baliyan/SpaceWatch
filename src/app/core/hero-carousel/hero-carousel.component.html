@@ -1,0 +1,35 @@
+<section id="hero">
+  <div class="hero-container">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+      <div class="carousel-inner" role="listbox">
+
+        <!-- Slide 1 -->
+        <div *ngFor="let item of carousels;let i=index;" #carouselItem id="{{i}}" class="carousel-item"
+          [ngClass]="activeIndex == carouselItem.id ? 'active' : ''"
+          style="background-image: url({{item.path}}); background-size: cover;">
+          <div class="carousel-container">
+            <div class="carousel-content">
+              <h2 class="animate__animated animate__fadeInDown">{{item.title}}</h2>
+              <p class="animate__animated animate__fadeInUp">({{item.camera}})</p>
+              <div>
+                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a class="carousel-control-prev" role="button" data-bs-slide="prev" (click)="changeCarousel('p')">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" role="button" data-bs-slide="next" (click)="changeCarousel('n')">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+  </div>
+</section><!-- End Hero -->
