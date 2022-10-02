@@ -10,6 +10,6 @@ export class ApodService {
   constructor(private http: HttpClient) {}
 
   getAPOD() {
-    return this.http.get(`https://api.nasa.gov/planetary/apod?api_key=${this.api_key}&start_date=2022-09-26`);
+    return this.http.get(`https://api.nasa.gov/planetary/apod?api_key=${this.api_key}`);
   }
 }

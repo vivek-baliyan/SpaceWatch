@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavBarComponent } from './core/nav-bar/nav-bar.component';
 import { HeroCarouselComponent } from './core/hero-carousel/hero-carousel.component';
+import { ApodComponent } from './apod/apod.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    HeroCarouselComponent
+    HeroCarouselComponent,
+    ApodComponent
   ],
   imports: [
     BrowserModule,
