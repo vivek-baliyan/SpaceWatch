@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { timeout } from 'rxjs';
 import { ApodService } from 'src/app/services/apod.service';
 
 @Component({
@@ -27,7 +28,9 @@ export class HeroCarouselComponent implements OnInit {
   activeIndex = 0;
   constructor(private apodService: ApodService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setInterval(() => this.changeCarousel('n'), 5000);
+  }
 
   changeCarousel(slide: string) {
     switch (slide) {
@@ -47,5 +50,9 @@ export class HeroCarouselComponent implements OnInit {
         this.activeIndex = 0;
         break;
     }
+  }
+
+  changeIndicator(index: number) {
+    this.activeIndex = index;
   }
 }

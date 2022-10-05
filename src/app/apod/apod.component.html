@@ -1,13 +1,22 @@
-<section id="apod" class="apod" style="padding-top: 120px;">
-  <div class="container">
-    <div class="section-title">
-      <h2>Astronomy Picture of the Day</h2>
-      <p>{{ apod.date | date: 'longDate'}}</p>
+<section id="apod" class="apod-section" style="padding-top: 120px;">
+  <div class="container" *ngIf="apod">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title">
+          <h2>Astronomy Picture of the Day</h2>
+          <p class="apod-date">{{ apod.date | date: 'longDate'}}</p>
+        </div>
+      </div>
+
     </div>
-    <div class="image" style="background: url('{{apod.url}}') center / contain no-repeat;"></div>
-    <div>
-      <h4 class="text-center p-3">{{ apod.title }}</h4>
-      <p><strong>Explanation: </strong>{{apod.explanation}}</p>
+    <div class="row">
+      <div class="col-5">
+        <div class="image" style="background: url('{{apod.url}}') center / contain no-repeat;"></div>
+      </div>
+      <div class="col-7">
+        <h4 class="apod-title">{{ apod.title }}</h4>
+        <p class="apod-explanation"><strong>Explanation: </strong>{{apod.explanation}}</p>
+      </div>
     </div>
   </div>
 </section>

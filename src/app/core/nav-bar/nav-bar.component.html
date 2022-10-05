@@ -3,11 +3,12 @@
     <h1 class="logo"><a routerLink="">SpaceWatch</a></h1>
     <nav id="navbar" class="navbar">
       <ul>
-        <li><a class="nav-link scrollto active">Home</a></li>
-        <li><a class="nav-link scrollto" href="#apod">APOD</a></li>
-        <li><a class="nav-link scrollto">Mars</a></li>
-        <li><a class="nav-link scrollto">About</a></li>
-        <li><a class="nav-link scrollto">Contact</a></li>
+        <li><a class="nav-link" routerLink="/home" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">Home</a>
+        </li>
+        <li><a class="nav-link" routerLink="/apod" routerLinkActive="active">APOD</a></li>
+        <li><a class="nav-link">Mars</a></li>
+        <li><a class="nav-link">About</a></li>
+        <li><a class="nav-link">Contact</a></li>
         <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
             <li><a href="#">Drop Down 1</a></li>

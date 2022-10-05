@@ -1,3 +1,18 @@
 .image {
-    min-height: 500px;
+  min-height: 500px;
+}
+
+.apod-date,
+.apod-title,
+.apod-explanation {
+  color: #EDEDED;
+}
+
+.apod-title {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.apod-explanation {
+  text-align: justify;
 }

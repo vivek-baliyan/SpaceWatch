@@ -2,11 +2,13 @@
   <div class="hero-container">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
-      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+      <ol class="carousel-indicators" id="hero-carousel-indicators">
+        <li *ngFor="let item of carousels;let i=index;" data-bs-target="#heroCarousel" #carouselIndicator id="{{i}}"
+          [ngClass]="activeIndex == carouselIndicator.id ? 'active' : ''" (click)="changeIndicator(i)">
+        </li>
+      </ol>
 
       <div class="carousel-inner" role="listbox">
-
-        <!-- Slide 1 -->
         <div *ngFor="let item of carousels;let i=index;" #carouselItem id="{{i}}" class="carousel-item"
           [ngClass]="activeIndex == carouselItem.id ? 'active' : ''"
           style="background-image: url({{item.path}}); background-size: cover;">

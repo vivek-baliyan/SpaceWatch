@@ -58,8 +58,8 @@
 .navbar a:hover:before,
 .navbar li:hover > a:before,
 .navbar .active:before {
-  visibility: visible;
-  width: 100%;
+  visibility: visible !important;
+  width: 100% !important;
 }
 
 .navbar a:hover,
