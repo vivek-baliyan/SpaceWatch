@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Gallery, GalleryItem, ImageItem, ImageSize } from 'ng-gallery';
+import {
+  Gallery,
+  GalleryItem,
+  GalleryRef,
+  ImageItem,
+  ImageSize,
+} from 'ng-gallery';
+import { Lightbox } from 'ng-gallery/lightbox';
 import { Apod } from '../models/apod';
 import { ApodService } from '../services/apod.service';
 
@@ -13,18 +20,25 @@ export class ApodComponent implements OnInit {
 
   items: GalleryItem[];
   galleryId = 'apod';
-  lightboxRef = this.gallery.ref(this.galleryId);
+  lightboxRef: GalleryRef;
 
-  constructor(private apodService: ApodService, private gallery: Gallery) {}
+  constructor(
+    private apodService: ApodService,
+    private gallery: Gallery,
+    private lightbox: Lightbox
+  ) {}
 
   ngOnInit(): void {
     this.getApod(this.getNowUTC());
 
+    this.lightboxRef = this.gallery.ref(this.galleryId);
     this.lightboxRef.setConfig({
       imageSize: ImageSize.Contain,
       thumb: false,
       counter: false,
     });
+
+    this.lightbox.setConfig({ panelClass: 'g-overlay' });
   }
 
   getApod(date: Date) {

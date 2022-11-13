@@ -1,0 +1,81 @@
+<section id="mars-gallery" class="mars-gallery">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title">
+          <h2>Mars Rover Photos</h2>
+          <hr style="color: #ffffff;">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col px-4">
+        <div class="row gy-3 mb-3">
+          <div class="col-3">
+            <label class="form-label">Rover</label>
+            <div class="input-group">
+              <select id="ddlRover" class="form-select" #ddlRover (change)="roverSelected(ddlRover.value)">
+                <option *ngFor="let rover of rovers" value="{{rover.id}}">{{rover.name}}</option>
+              </select>
+              <span class="input-group-text"><i class="bi bi-info-circle" [popover]="popTemplate"
+                  popoverTitle="Rover Info" triggers="mouseenter:mouseleave"></i></span>
+            </div>
+          </div>
+          <div class="col-3">
+            <label class="form-label">Camera</label>
+            <select id="ddlCamera" class="form-select" #ddlCamera>
+              <option value="0">-Select-</option>
+              <option *ngFor="let camera of cameras" value="{{camera.id}}">{{camera.full_name}}</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <label class="form-label">Sol</label>
+            <input type="text" class="form-control" value="0" #txtSol>
+          </div>
+          <div class="col-3">
+            <label class="form-label">&nbsp;</label>
+            <div>
+              <button class="btn btn-warning" (click)="searchPhotos(ddlRover.value, ddlCamera.value, txtSol.value)">
+                <i class="bi bi-search"></i> Search</button>
+            </div>
+          </div>
+        </div>
+        <div class="row gy-3 mb-3 justify-content-center">
+          <div class="col-xl-3 col-lg-4 col-md-6" *ngFor="let photo of paginatedPhotos;index as i">
+            <div class="gallery-item h-100">
+              <img src="{{photo.img_src}}" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-end justify-content-center" [lightbox]="i"
+                [gallery]="galleryId">
+                <table class="text-center" style="color: #ffffff;">
+                  <tr>
+                    <td>{{photo.camera.full_name}}</td>
+                  </tr>
+                  <tr>
+                    <td>Date : {{photo.earth_date | date}}</td>
+                  </tr>
+                  <tr>
+                    <td>Sol : {{photo.sol}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3" *ngIf="paginatedPhotos?.length > 0">
+          <div class="col">
+            <div class="d-flex justify-content-center">
+              <pagination [boundaryLinks]="true" [totalItems]="photos.length" [(ngModel)]="currentPage" [rotate]="true"
+                [maxSize]="6" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+                firstText="&laquo;" lastText="&raquo;">
+              </pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #popTemplate>
+  <div [innerHtml]="html"></div>
+</ng-template>

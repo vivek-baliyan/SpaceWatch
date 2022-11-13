@@ -1,3 +1,7 @@
+.apod-section {
+  margin-top: 30px;
+}
+
 .image {
   min-height: 500px;
 }
@@ -5,7 +9,7 @@
 .apod-date,
 .apod-title,
 .apod-explanation {
-  color: #EDEDED;
+  color: #ededed;
 }
 
 .apod-title {
