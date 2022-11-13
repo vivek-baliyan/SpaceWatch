@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs';
+import { Gallery, GalleryItem, ImageItem, ImageSize } from 'ng-gallery';
 import { Apod } from '../models/apod';
 import { ApodService } from '../services/apod.service';
 
@@ -10,19 +10,42 @@ import { ApodService } from '../services/apod.service';
 })
 export class ApodComponent implements OnInit {
   apod: Apod;
-  date = new Date();
-  constructor(private apodService: ApodService) {}
+
+  items: GalleryItem[];
+  galleryId = 'apod';
+  lightboxRef = this.gallery.ref(this.galleryId);
+
+  constructor(private apodService: ApodService, private gallery: Gallery) {}
 
   ngOnInit(): void {
-    this.getApod(new Date());
+    this.getApod(this.getNowUTC());
+
+    this.lightboxRef.setConfig({
+      imageSize: ImageSize.Contain,
+      thumb: false,
+      counter: false,
+    });
   }
 
   getApod(date: Date) {
-    this.apodService.getAPOD(date).subscribe((response) => {
+    this.apodService.getApod(date).subscribe((response: Apod) => {
       if (response.media_type !== 'image') {
         date.setDate(date.getDate() - 1);
-        this.getApod(date);
-      } else this.apod = response;
+        return this.getApod(date);
+      }
+      this.apod = response;
+      this.items = [
+        new ImageItem({
+          src: this.apod.hdurl,
+          thumb: this.apod.url,
+        }),
+      ];
+      this.lightboxRef.load(this.items);
     });
+  }
+
+  getNowUTC() {
+    const now = new Date();
+    return new Date(now.getTime() + now.getTimezoneOffset() * 60000);
   }
 }

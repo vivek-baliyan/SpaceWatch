@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { timeout } from 'rxjs';
 import { ApodService } from 'src/app/services/apod.service';
 
 @Component({
