@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { MarsRoverComponent } from './mars-rover/mars-rover.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'apod', component: ApodComponent },
   { path: 'mars', component: MarsRoverComponent },

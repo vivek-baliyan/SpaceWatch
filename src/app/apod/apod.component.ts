@@ -29,8 +29,6 @@ export class ApodComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getApod(this.getNowUTC());
-
     this.lightboxRef = this.gallery.ref(this.galleryId);
     this.lightboxRef.setConfig({
       imageSize: ImageSize.Contain,
@@ -39,12 +37,15 @@ export class ApodComponent implements OnInit {
     });
 
     this.lightbox.setConfig({ panelClass: 'g-overlay' });
+
+    this.getApod(this.getNowUTC());
   }
 
-  getApod(date: Date) {
+  getApod(date: Date, isNext = false) {
     this.apodService.getApod(date).subscribe((response: Apod) => {
       if (response.media_type !== 'image') {
-        date.setDate(date.getDate() - 1);
+        if (isNext) date.setDate(date.getDate() + 1);
+        else date.setDate(date.getDate() - 1);
         return this.getApod(date);
       }
       this.apod = response;
@@ -56,6 +57,23 @@ export class ApodComponent implements OnInit {
       ];
       this.lightboxRef.load(this.items);
     });
+  }
+
+  previousApod() {
+    let date = new Date(this.apod.date);
+    date.setDate(date.getDate() - 1);
+    this.getApod(date);
+  }
+
+  nextApod() {
+    let date = new Date(this.apod.date);
+    if (date.getDate() === this.getNowUTC().getDate()) {
+      alert('Apod not availabe for next data');
+      return;
+    }
+
+    date.setDate(date.getDate() + 1);
+    this.getApod(date, true);
   }
 
   getNowUTC() {

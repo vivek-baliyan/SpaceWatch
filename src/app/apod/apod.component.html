@@ -4,12 +4,17 @@
       <div class="col-12">
         <div class="section-title">
           <h2>Astronomy Picture of the Day</h2>
-          <p class="apod-date">{{ apod.date | date: 'longDate'}}</p>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-success btn-sm" (click)="previousApod()"><i class="bi bi-chevron-double-left"></i></button>
+            <span class="apod-date">{{ apod.date | date: 'longDate'}}</span>
+            <button class="btn btn-success btn-sm" (click)="nextApod()"><i class="bi bi-chevron-double-right"></i></button>
+          </div>
+          
           <hr style="color: #ffffff;">
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row px-3">
       <div class="col-5">
         <div class="image" style="background: url('{{apod.url}}') center / contain no-repeat;" [lightbox]="0"
           [gallery]="galleryId"></div>
